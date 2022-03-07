@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p2>UPLOAD</p2>
+<br>
+<br>
+
+
+<div sec:authorize="hasAuthority('ROLE_ADMIN')">
+    2. Only for admin
+    <input type="button" value="Admin" onclick="window.location.href = 'admin'">
+</div>
+
+<br><br>
+
+Only for HR Managers
+<sec:authorize access="hasAuthority('ROLE_USER')">
+    <input type="button" value="User" onclick="window.location.href = 'user'">
+</sec:authorize>
+
+
+</body>
+</html>
