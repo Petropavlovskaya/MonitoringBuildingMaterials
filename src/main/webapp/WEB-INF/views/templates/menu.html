@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<body>
+<div class="menu" th:fragment="menu">
+
+    <div sec:authorize="hasAuthority('ROLE_USER')">
+        <ul class="menu-v">
+            <li><a th:href="@{/listOfUnreported}"> <br>[[#{label.menu.listOfUnreported}]] <br><br> </a></li>
+            <li><span><br>[[#{label.menu.report}]]<br><br></span>
+                <ul>
+                    <li><a th:href="@{/report/download}"> <br>[[#{label.menu.report.download}]]<br><br> </a></li>
+                    <li><a th:href="@{/report/unload}"> <br>[[#{label.menu.report.unload}]]<br><br> </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div sec:authorize="hasAuthority('ROLE_POWER_USER')">
+        <ul class="menu-v">
+            <li><span><br>[[#{label.menu.directory}]]<br><br></span>
+                <ul>
+                    <li><a th:href="@{/directory/unit}"> <br>[[#{label.menu.unit}]]<br><br> </a></li>
+                    <li><a th:href="@{/directory/material}"> <br>[[#{label.menu.material}]]<br><br> </a></li>
+                    <li><a th:href="@{/directory/organization}"> <br>[[#{label.menu.organization}]]<br><br> </a></li>
+                    <li><a th:href="@{/directory/report}"> <br>[[#{label.menu.report}]]<br><br> </a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+        <ul class="menu-v">
+            <li><a th:href="@{/users}"> <br>[[#{label.menu.user}]] <br><br> </a></li>
+        </ul>
+    </div>
+
+</div>
+<!--<div class="menu" th:fragment="menu">
+    <ul class="menu-v">
+        <li><a th:href="@{/main}"> <br>[[#{label.menu.main}]] <br><br> </a></li>
+        <li><a th:href="@{/medicine}"> <br>[[#{label.menu.medicine}]] <br><br> </a></li>
+
+        <li th:unless="${login}"><a th:href="@{/accounts/signup}"> <br>[[#{label.menu.signup}]] <br><br> </a></li>
+        <li th:unless="${login}"><a th:href="@{/accounts/login}"> <br>[[#{label.menu.login}]] <br><br></a></li>
+
+        <li th:if="${login}"><a th:href="@{/accounts/logout}"> <br>[[#{label.menu.logout}]] <br><br> </a></li>
+    </ul>
+</div>
+
+<div class="menu" th:fragment="menu_customer">
+    <ul class="menu-v">
+        <li><a th:href="@{/customers/main}"> <br>[[#{label.menu.main}]] <br><br> </a></li>
+        <li><span><br>[[#{label.menu.medicine}]]<br><br></span>
+            <ul>
+                <li><a th:href="@{/customers/medicine/list}"> <br>[[#{label.menu.drugList}]]<br><br> </a></li>
+                <li><a th:href="@{/customers/medicine/favorite}"> <br>[[#{label.menu.favorite}]]<br><br> </a></li>
+            </ul>
+        </li>
+
+        <li><span><br>[[#{label.menu.cabinet}]]<br><br></span>
+            <ul>
+                <li><a th:href="@{/customers/cabinet/profile}"><br>[[#{label.menu.profile}]]<br><br></a></li>
+                <li><a th:href="@{/customers/cabinet/cart}"><br>[[#{label.menu.cart}]]<br><br></a></li>
+                <li><a th:href="@{/customers/cabinet/history}"><br>[[#{label.menu.ordersHistory}]]<br><br></a></li>
+                <li><a th:href="@{/customers/cabinet/recipe}"><br>[[#{label.menu.recipe}]]<br><br></a></li>
+            </ul>
+        </li>
+
+        <li><a th:href="@{/accounts/logout}"> <br>[[#{label.menu.logout}]] <br><br> </a></li>
+    </ul>
+</div>-->
+
+</body>
+</html>

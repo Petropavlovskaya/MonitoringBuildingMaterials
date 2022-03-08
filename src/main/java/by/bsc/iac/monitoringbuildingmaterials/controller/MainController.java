@@ -16,7 +16,7 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(){
-        return "uploadPage";
+        return "main";
     }
 
     @GetMapping("/admin")
