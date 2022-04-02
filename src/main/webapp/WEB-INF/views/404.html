@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MBM. 404 error page.</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+</head>
+<body>
+<div th:replace="templates/header::MyHeader"></div>
+<div id="line"></div>
+
+<div th:replace="templates/menu::menu"></div>
+
+<div id="center">
+    <p2>Exception.</p2><br><br>
+    <p>Additional information.</p><br>
+    <p>Message: <span th:utext="${exception}"></span> </p><br>
+    <p>Url: <span th:utext="${url}"></span> </p><br>
+</div>
+
+<!--<div th:replace="templates/right::right"></div>-->
+
+<div th:replace="templates/footer::footer"></div>
+
+</body>
+</html>

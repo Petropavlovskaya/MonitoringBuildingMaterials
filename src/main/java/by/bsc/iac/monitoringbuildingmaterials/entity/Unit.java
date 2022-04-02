@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.Objects;
 
 /**
@@ -25,6 +26,10 @@ import java.util.Objects;
 @Table(name = "units")
 public class Unit {
 
+    public Unit(String name) {
+        this.name = name;
+    }
+
     /**
      * Unit ID
      */
@@ -36,7 +41,7 @@ public class Unit {
     /**
      * Unit name
      */
-    @Column(name = "name_unit")
+    @Column(name = "name_unit", unique = true)
     private String name;
 
     @Override
@@ -44,11 +49,16 @@ public class Unit {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Unit unit = (Unit) o;
-        return Objects.equals(id, unit.id);
+        return this.getId()==unit.getId();
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(id, name);
     }
+
+    /*   @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }*/
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MBM. Unit reference book page.</title>
+    <link rel="stylesheet" href="../resources/css/style.css">
+</head>
+<body>
+<div th:replace="templates/header::MyHeader"></div>
+<div id="line"></div>
+
+<div th:replace="templates/menu::menu"></div>
+
+<div id="center">
+    <h2>All units:</h2><br>
+
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Unit name</th>
+        </tr>
+        <th:block th:each="unit, state: ${unitList}", th:with="unitId=${unit.id}">
+        <tr>
+            <td th:utext="${state.count}"></td>
+            <td th:utext="${unit.name}"></td>
+            <td>
+                <input type="button" value="Update" onclick="window.location.href = '/iacsk/reference_book/unit/saveUnit'"/>
+                <input type="button" value="Delete" onclick="window.location.href = '/iacsk/reference_book/unit/deleteUnit'"/>
+            </td>
+        </tr>
+        </th:block>
+    </table>
+    <br>
+    <input type="button" value="AddNewUnit" onclick="window.location.href = '/iacsk/reference_book/unit/addNewUnit'"/>
+
+</div>
+
+<!--<div th:replace="templates/right::right"></div>-->
+
+<div th:replace="templates/footer::footer"></div>
+</body>
+</html>

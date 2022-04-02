@@ -37,13 +37,13 @@ public class ReportPeriod {
     /**
      * Month of report period
      */
-    @Column
+    @Column(name = "report_month")
     private String month;
 
     /**
      * Year of report period
      */
-    @Column
+    @Column(name = "report_year")
     private int year;
 
     @Override

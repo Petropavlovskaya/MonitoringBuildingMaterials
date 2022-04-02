@@ -1,6 +1,5 @@
 package by.bsc.iac.monitoringbuildingmaterials.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,10 +13,18 @@ import java.util.Set;
 /**
  * Material definition. Class describes materials which organizations are produce.
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "materials")
 public class Material {
+
+    public Material(String name, Unit unit) {
+        this.name = name;
+        this.unit = unit;
+    }
 
     /**
      * Material ID
@@ -37,7 +44,7 @@ public class Material {
      * Material unit
      */
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", updatable = false, insertable = false)
     private Unit unit;
 
     /**
@@ -45,5 +52,19 @@ public class Material {
      */
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST}
             , mappedBy = "material")
+    @ToString.Exclude
     private Set<Capacity> capacitySet;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Material material = (Material) o;
+        return Objects.equals(id, material.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

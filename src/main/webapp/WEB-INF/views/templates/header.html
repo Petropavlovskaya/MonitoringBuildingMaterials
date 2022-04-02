@@ -2,40 +2,105 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body>
-<div  id="logo" th:fragment="MyHeader" align="center">
-<!--
-    <div align="right" th:switch="#{lang}">
-        <label class="language">
+<div id="logo" th:fragment="MyHeader" align="center">
+    <div align="center">
+        <img class="img-center" src="../resources/images/logo1.gif" alt="AppLogo"/>
+        <img class="img-left" src="../resources/images/materials_small.jpg" alt="LogoImage"/>
+    </div>
+    <!--<span th:text="#{lang.change}"></span>:
+    <select id="locales">
+        <option value=""></option>
+        <option value="en" th:text="#{lang.eng}"></option>
+        <option value="fr" th:text="#{lang.fr}"></option>
+    </select>-->
+    <div align="right">
+        <!--        <label class="language">-->
+        <span class="language">
+            <input class="input-lang" type="radio" name="locales" id="ru" value="ru">
+            <label for="ru">
+                <img src="../resources/images/RU-z.jpg" alt="RU">
+            </label>
 
-            <p th:case="'ru'">
-                <input class="ru" type="radio" name="lang"><a href="?lang=pl">
-                <img src="resources/img/PL.jpg" alt="PL"></a>
-                <input class="en" type="radio" name="lang"><a href="?lang=en">
-                <img src="resources/img/EN.jpg" alt="EN"></a>
-            </p>
+            <input class="input-lang" type="radio" name="locales" id="en" value="en">
+            <label for="en">
+                <img src="../resources/images/GB-z.jpg" alt="EN">
+            </label>
+        </span>
 
-            <p th:case="'en'">
-                <input class="ru" type="radio" name="lang"><a href="?lang=ru">
-                <img src="resources/img/RU.jpg" alt="RU"></a>
-                <input class="pl-en" type="radio" name="lang"><a href="?lang=pl">
-                <img src="resources/img/PL.jpg" alt="PL"></a>
-            </p>
+        <!--        </label>-->
 
-            <p th:case="'pl'">
-                <input class="ru" type="radio" name="lang"><a href="?lang=ru">
-                <img src="resources/img/RU.jpg" alt="RU"></a>
-                <input class="en" type="radio" name="lang"><a href="?lang=en">
-                <img src="resources/img/EN.jpg" alt="EN"></a>
-            </p>
 
-        </label>
-    </div>-->
+        <!--        it's work bed: -->
+        <!--                <label class="language">
+                            <input class="ru" type="radio" name="locales" value="ru" id="ru" >
+                            <img src="../resources/images/RU-z.jpg" alt="RU">
+                            <input class="en" type="radio" name="locales" value="en" id="en">
+                            <img src="../resources/images/GB-z.jpg" alt="EN">
+                        </label>-->
+    </div>
 
-    <!--<div th:switch="${user.role}">
-        <p th:case="'admin'">User is an administrator</p>
-        <p th:case="#{roles.manager}">User is a manager</p>
-        <p th:case="*">User is some other thing</p>
-    </div>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".input-lang").change(function () {
+                let checkedValue = $('.input-lang:checked').val();
+                let length = window.location.toString().length;
+                // let checkedValue  = $('#locales').val();
+                // if (checkedValue  != '') {
+                if (checkedValue !== '') {
+                    if (window.location.toString().includes('?lang=')){
+                        window.location.replace('?lang=' + checkedValue);
+                    }else {
+                        window.location.replace(window.location.toString() + '/international?lang=' + checkedValue);
+                    }
+
+
+/*                    if (window.location.contain('?lang=ru') || window.location.contain('?lang=en')) {
+                        window.location.replace(window.location.toString().substring(0, length - 2) + checkedValue);
+                        return;
+                    }
+                    window.location.replace(window.location.toString() + '/international?lang=' + checkedValue);*/
+                }
+            });
+        });
+    </script>
+    <!--
+        <div align="right" th:switch="#{lang}">
+            <label class="language">
+
+                <p th:case="'ru'">
+                    <input class="ru" type="radio" name="lang"><a href="?lang=pl">
+                    <img src="resources/img/PL.jpg" alt="PL"></a>
+                    <input class="en" type="radio" name="lang"><a href="?lang=en">
+                    <img src="resources/img/EN.jpg" alt="EN"></a>
+                </p>
+
+                <p th:case="'en'">
+                    <input class="ru" type="radio" name="lang"><a href="?lang=ru">
+                    <img src="resources/img/RU.jpg" alt="RU"></a>
+                    <input class="pl-en" type="radio" name="lang"><a href="?lang=pl">
+                    <img src="resources/img/PL.jpg" alt="PL"></a>
+                </p>
+
+                <p th:case="'pl'">
+                    <input class="ru" type="radio" name="lang"><a href="?lang=ru">
+                    <img src="resources/img/RU.jpg" alt="RU"></a>
+                    <input class="en" type="radio" name="lang"><a href="?lang=en">
+                    <img src="resources/img/EN.jpg" alt="EN"></a>
+                </p>
+
+            </label>
+        </div>
+
+
+
+
+        div th:switch="${user.role}">
+            <p th:case="'admin'">User is an administrator</p>
+            <p th:case="#{roles.manager}">User is a manager</p>
+            <p th:case="*">User is some other thing</p>
+        </div>-->
 </div>
 
 </body>

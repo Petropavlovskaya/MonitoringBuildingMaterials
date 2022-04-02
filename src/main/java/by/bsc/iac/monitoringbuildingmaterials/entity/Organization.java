@@ -1,6 +1,5 @@
 package by.bsc.iac.monitoringbuildingmaterials.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -12,9 +11,12 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * Organization definition. Class describes organizations, which are production a building materials.
+ * Organization definition. Class describes organizations, which are produce a building materials.
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "organizations")
 public class Organization {
@@ -44,6 +46,7 @@ public class Organization {
             joinColumns = @JoinColumn(name = "fk_organization"),
             inverseJoinColumns = @JoinColumn(name = "fk_form")
     )
+    @ToString.Exclude
     private Set<Form> formSet;
 
     /**
@@ -51,6 +54,19 @@ public class Organization {
      */
     @OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST}
             , mappedBy = "organization")
+    @ToString.Exclude
     private Set<Capacity> capacitySet;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Organization that = (Organization) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

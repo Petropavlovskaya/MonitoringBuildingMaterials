@@ -1,13 +1,21 @@
 package by.bsc.iac.monitoringbuildingmaterials.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
- * Capacity definition. Class describes capacity of organization, which is produce a building material.
+ * Capacity definition. Class describes capacity of organization, which producing a building material.
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "materials_organizations")
 public class Capacity {
@@ -39,4 +47,17 @@ public class Capacity {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "fk_organization")
     private Organization organization;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Capacity capacity = (Capacity) o;
+        return Objects.equals(id, capacity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

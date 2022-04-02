@@ -1,15 +1,23 @@
 package by.bsc.iac.monitoringbuildingmaterials.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Report definition by dry mixes (form 1a).
  * Class describes amount of produced, shipment to the domestic market and exported of dry mixes include a mixes on a gypsum base
  * (for a report month & for a period since begin of year) and amount of product's stock for an end of report period.
  */
-@Data
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "dm_1a_report")
 public class DryMixes1aReport {
@@ -103,15 +111,26 @@ public class DryMixes1aReport {
      * Additional information to describe a report form
      */
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", updatable = false, insertable = false)
     private Report report;
 
     /**
      * Type of report form
      */
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", updatable = false, insertable = false)
     private Form form;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        DryMixes1aReport that = (DryMixes1aReport) o;
+        return Objects.equals(id, that.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

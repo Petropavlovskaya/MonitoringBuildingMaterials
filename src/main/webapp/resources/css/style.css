@@ -122,11 +122,6 @@ body {
     position: absolute;
     right: 80px;   /*20*/
 }
-.img-rightPL {
-    alignment: right;
-    position: absolute;
-    right: 20px;
-}
 
 .links {
     color: #800080;
@@ -405,8 +400,7 @@ ul.menu-v ul li.iehover ul,
 ul.menu-v ul ul li.iehover ul {
     display: block;
 }
-
-
+/*
 label.language {
     right: 20px;
     top: 20px;
@@ -417,25 +411,46 @@ label.language {
     position: absolute;
 }
 
-label.language input[type="radio"] + a {
+label.language input[type="radio"] {
     position: absolute;
     width: 100%;
-    height: 70%;
+    height: 60%;
     cursor: pointer;
-    /*background: #850c73;*/
+
+    border: 0;
+    color: transparent;
+    !*background: #850c73;*!
+    !*z-index: 0;*!
 }
 
-label.language input.ru[type="radio"] + a {
+label.language input.ru[type="radio"] {
     left: 0;
     top: 0;
     right: 10px;
 }
-label.language input.en[type="radio"] + a {
+label.language input.en[type="radio"]{
     left: 0;
-    top: 40px;
+    top: 28px;
+}*/
+
+input[type=radio]:checked + label>img {
+    border: 1px solid #fff;
+    box-shadow: 0 0 2px 2px #36564b;
 }
-label.language input.pl-en[type="radio"] + a {
-    left: 0;
-    top: 40px;
+.input-lang{
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    cursor: pointer;
+    display: none;
+}
+span.language {
+    right: 20px;
+    top: 20px;
+    horiz-align: right;
+    width: 40px;
+    height: 40px;
+    display: block;
+    position: absolute;
 }
 

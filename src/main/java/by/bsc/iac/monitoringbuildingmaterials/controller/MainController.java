@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -38,5 +39,17 @@ public class MainController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @GetMapping("/international")
+    public String getInternationalPage(HttpServletRequest request){
+        return new PageController().getInternationalPage(request);
+    }
+
+
+    @GetMapping("/saveUnit")
+    public String saveUnit(@RequestParam(name = "empId") int id){
+
+        return "main";
     }
 }
