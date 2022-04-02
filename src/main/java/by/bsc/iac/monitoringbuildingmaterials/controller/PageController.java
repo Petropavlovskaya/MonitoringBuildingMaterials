@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/international")
 public class PageController {
 
-
     @GetMapping("/international")
     public String getInternationalPage(HttpServletRequest request) {
-        System.out.println(request.getParameter("lang"));
         String newURI = request.getRequestURI().replace("/iacsk", "");
         if (newURI.contains("?lang=")) {
             newURI = newURI.substring(0, newURI.length() - 2) + request.getParameter("lang");
@@ -23,9 +21,4 @@ public class PageController {
         return "redirect:" + newURI;
     }
 
-//    @GetMapping("*/international")
-//    public String getInternationalPage(){
-//
-//        return "international";
-//    }
 }

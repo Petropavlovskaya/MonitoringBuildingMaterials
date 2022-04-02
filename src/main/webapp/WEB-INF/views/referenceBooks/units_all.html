@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <title>MBM. Unit reference book page.</title>
     <link rel="stylesheet" href="../resources/css/style.css">
+    <link href="resources/images/mini.jpg" rel="icon" type="image/gif"/>
 </head>
 <body>
 <div th:replace="templates/header::MyHeader"></div>
 <div id="line"></div>
-
 <div th:replace="templates/menu::menu"></div>
 
 <div id="center">
-    <h2>All units:</h2><br>
+    <h2  th:text="#{label.unit.all}">Available units</h2><br>
 
     <table>
         <tr>
-            <th>No</th>
-            <th>Unit name</th>
+            <th th:text="#{label.table.number}">No</th>
+            <th th:text="#{label.table.name}">Unit name</th>
         </tr>
         <th:block th:each="unit, state: ${unitList}", th:with="unitId=${unit.id}">
         <tr>
@@ -31,7 +31,7 @@
         </th:block>
     </table>
     <br>
-    <input type="button" value="AddNewUnit" onclick="window.location.href = '/iacsk/reference_book/unit/addNewUnit'"/>
+    <input type="button" th:value=" #{label.button.add} " onclick="window.location.href = '/iacsk/reference_book/unit/addNewUnit'"/>
 
 </div>
 

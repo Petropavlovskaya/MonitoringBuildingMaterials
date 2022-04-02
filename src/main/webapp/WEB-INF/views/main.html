@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>MBM. Main page.</title>
@@ -7,9 +7,47 @@
     <link href="resources/images/mini.jpg" rel="icon" type="image/gif"/>
 </head>
 <body>
-<div th:replace="templates/header::MyHeader"></div>
-<div id="line"></div>
+<div id="logo" align="center">
+    <div align="center">
+        <img class="img-center" src="resources/images/logo1.gif" alt="AppLogo"/>
+        <img class="img-left" src="resources/images/materials_small.jpg" alt="LogoImage"/>
+    </div>
 
+    <div align="right">
+        <span class="language">
+            <input class="input-lang" type="radio" name="locales" id="ru" value="ru">
+            <label for="ru">
+                <img src="resources/images/RU-z.jpg" alt="RU">
+            </label>
+
+            <input class="input-lang" type="radio" name="locales" id="en" value="en">
+            <label for="en">
+                <img src="resources/images/GB-z.jpg" alt="EN">
+            </label>
+        </span>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".input-lang").change(function () {
+                let checkedValue = $('.input-lang:checked').val();
+                let length = window.location.toString().length;
+                if (checkedValue !== '') {
+                    if (window.location.toString().includes('?lang=')) {
+                        window.location.replace('?lang=' + checkedValue);
+                    } else {
+                        window.location.replace(window.location.toString() + 'international?lang=' + checkedValue);
+                    }
+                }
+            });
+        });
+    </script>
+</div>
+
+<div id="line"></div>
 <div th:replace="templates/menu::menu"></div>
 
 <div id="center">
@@ -19,6 +57,5 @@
 <!--<div th:replace="templates/right::right"></div>-->
 
 <div th:replace="templates/footer::footer"></div>
-
 </body>
 </html>
